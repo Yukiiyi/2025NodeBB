@@ -129,6 +129,8 @@ async function listPlugins() {
 }
 
 async function listEvents(count = 10) {
+	// Log a message to confirm this function is triggered
+	console.log('yuqi');
 	await db.init();
 	const eventData = await events.getEvents({
 		filter: '',
@@ -137,7 +139,11 @@ async function listEvents(count = 10) {
 	});
 	console.log(chalk.bold(`\nDisplaying last ${count} administrative events...`));
 	eventData.forEach((event) => {
-		console.log(`  * ${chalk.green(String(event.timestampISO))} ${chalk.yellow(String(event.type))}${event.text ? ` ${event.text}` : ''} (uid: ${event.uid ? event.uid : 0})`);
+		const timestamp = chalk.green(String(event.timestampISO));
+		const type = chalk.yellow(String(event.type));
+		const textPart = event.text ? ` ${event.text('here')}` : '';
+		const uidPart = event.uid ? event.uid : 0;
+		console.log(`  * ${timestamp} ${type}${textPart} (uid: ${uidPart})`);
 	});
 	process.exit();
 }
