@@ -141,12 +141,13 @@ async function listEvents(count = 10) {
 	eventData.forEach((event) => {
 		const timestamp = chalk.green(String(event.timestampISO));
 		const type = chalk.yellow(String(event.type));
-		const textPart = event.text ? ` ${event.text('here')}` : '';
+		const textPart = event.text ? ` ${event.text}` : '';
 		const uidPart = event.uid ? event.uid : 0;
 		console.log(`  * ${timestamp} ${type}${textPart} (uid: ${uidPart})`);
 	});
 	process.exit();
 }
+// recieved help from chatgpt
 
 async function info() {
 	console.log('');
